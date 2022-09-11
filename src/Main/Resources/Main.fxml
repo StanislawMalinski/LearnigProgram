@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane prefHeight="900.0" prefWidth="1203.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontEnd.MainController">
+   <children>
+      <Pane layoutX="500.0" prefHeight="400.0" prefWidth="100.0" />
+      <MenuBar prefHeight="30.0" prefWidth="1440.0">
+        <menus>
+          <Menu fx:id="MenuHelpButton" mnemonicParsing="false" onAction="#MenuHelp" text="Help" />
+            <Menu fx:id="FileButton" mnemonicParsing="false" text="File">
+              <items>
+                <MenuItem fx:id="AddFileButton" mnemonicParsing="false" onAction="#AddFile" text="Add File" />
+                  <MenuItem fx:id="RemoveFIleButton" mnemonicParsing="false" onAction="#RemoveFile" text="Remove File" />
+                  <MenuItem fx:id="EditFileButton" mnemonicParsing="false" onAction="#EditFile" text="Edit FIle" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem fx:id="AddProblemButton" mnemonicParsing="false" onAction="#AddProblem" text="Add problem" />
+              </items>
+            </Menu>
+            <Menu fx:id="SettingButton" mnemonicParsing="false" onAction="#Setting" text="Setting" />
+            <Menu fx:id="StatsButton" mnemonicParsing="false" onAction="#Stats" text="Stats" />
+            <Menu mnemonicParsing="false" text="Learn">
+              <items>
+                <MenuItem fx:id="PickTheSubjectButton" mnemonicParsing="false" onAction="#PickTheSubject" text="Pick the subject" />
+                  <Menu fx:id="SetLearningModeButton" disable="true" mnemonicParsing="false" text="Set Learning Mode">
+                     <items>
+                        <MenuItem fx:id="FlashcardsButton" mnemonicParsing="false" onAction="#Flashcards" text="Flashcards" />
+                        <MenuItem fx:id="MeteoritesButton" disable="true" mnemonicParsing="false" onAction="#Meteorites" text="Meteorites" />
+                        <MenuItem fx:id="ExamButton" disable="true" mnemonicParsing="false" onAction="#Exam" text="Exame" />
+                        <MenuItem fx:id="WritingButton" disable="true" mnemonicParsing="false" onAction="#Writing" text="Writing" />
+                        <MenuItem fx:id="LearnModeButton" disable="true" mnemonicParsing="false" onAction="#LearnMode" text="Learn mode" />
+                     </items>
+                  </Menu>
+              </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+      <TitledPane animated="false" collapsible="false" layoutX="1240.0" layoutY="30.0" prefHeight="800.0" prefWidth="200.0" text="Question rank">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+        </content>
+      </TitledPane>
+      <Pane fx:id="AnswerPlatfromPane" layoutX="30.0" layoutY="50.0" prefHeight="770.0" prefWidth="700.0" />
+   </children>
+</AnchorPane>
