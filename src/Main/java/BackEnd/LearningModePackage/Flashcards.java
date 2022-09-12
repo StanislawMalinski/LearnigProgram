@@ -139,11 +139,11 @@ n - revied n times
             public void handle(KeyEvent keyEvent) {
                 if (keyEvent.getCode() == KeyCode.ENTER) {
                     FlipFlashCard();
-                } else if (keyEvent.getCode() == KeyCode.D){
+                } else if (keyEvent.getCode() == KeyCode.D || keyEvent.getCode() == KeyCode.RIGHT ){
                     Teacher.getTeacher().addSucces();
                     Teacher.getTeacher().addAttempt();
                     Teacher.getTeacher().next();
-                } else if (keyEvent.getCode() == KeyCode.A) {
+                } else if (keyEvent.getCode() == KeyCode.A || keyEvent.getCode() == KeyCode.LEFT ) {
                     Teacher.getTeacher().addAttempt();
                     Teacher.getTeacher().next();
                 }
