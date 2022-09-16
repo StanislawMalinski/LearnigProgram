@@ -1,0 +1,16 @@
+<Sentence> = <Verb>
+<Sentence> = <Person>+<Verb>
+<Sentence> = <Sentence>+<Conjunction>+<Sentence>
+<Person> = <Noun>+<Person>
+<Person> = <Pronoun>
+<Verb> = <Verb>+<Adjective>
+<Verb> = <Adjective>+<Verb>
+<Verb> = <Verb>+<Noun>
+<Verb> = <Noun>+<Verb>
+<Verb> = <Verb>+<Verb>
+<Verb> = <Adverb>+<Verb>
+<Verb> = <Verb>+<Adverb>
+<Adjective> = <Noun>+<Adjective>
+<Adjective> = <Numeral>
+<Adjective> = <Adjective>+<Conjunction>+<Adjective>
+<Noun> = <Adverb>+<Noun>

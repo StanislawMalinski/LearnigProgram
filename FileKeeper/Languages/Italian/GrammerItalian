@@ -1,0 +1,29 @@
+Name/$"Italian"$
+Person/$"First"$"Singular"$"Unisex"$"Io"$
+Person/$"Second"$"Singular"$"Unisex"$"Tu"$
+Person/$"Third"$"Singular"$"Male"$"Lui"$
+Person/$"Third"$"Singular"$"Female""$"Lei"$
+Person/$"First"$"Plural"$"Unisex"$"Noi"$
+Person/$"Second"$"Plural"$"Unisex"$"Voi"$
+Person/$"Third"$"Plural"$"Unisex"$"Loro"$
+Tense/$"Passato prossimo"$"Past"$
+Tense/$"Imperfetto"$"Past"$
+Tense/$"Trapassato prossimo"$"Past"$
+Tense/$"Passato remoto"$"Past"$
+Tense/$"Trapassato remoto"$"Past"$
+Tense/$"Presente"$"Present"$"Use in order to tell what is happening right now."$
+Grammer/$"Presente"$"Sentece"$"<Person>+<Verb<"Presente">>+
+Tense/$"Futuro semplice"$"Future"$
+Tense/$"Futuro anteriore"$"Future"$
+Verb/$"Passato prossimo"$1$"-are"$"-o"$"-i"$"-a"$"-a"$"-iamo"$"-ate"$"-ano"$
+Verb/$"Passato prossimo"$2$"-ere"$"-o"$"-i"$"-e"$"-e"$"-iamo"$"-ete"$"-ono"$
+Verb/$"Passato prossimo"$3$"-ire"$"-o"$"-i"$"-e"$"-e"$"-iamo"$"-ite"$"-ono"$
+Verb/$"Passato prossimo"$4$"-ire"$"-isco"$"-isci"$"-isce"$"-isce"$"-iamo"$"-ite"$"-iscono"$
+Adjective/$"Singular"$"Male"$"-o"$"-o"$
+Adjective/$"Singular"$"Female"$"-o"$"-a"$
+Adjective/$"Plural"$"Male"$"-o"$"-i"$
+Adjective/$"Plural"$"Female"$"-o"$"-e"$
+Adjective/$"Singular"$"Male"$"-e"$"-e"$
+Adjective/$"Singular"$"Female"$"-e"$"-e"$
+Adjective/$"Plural"$"Male"$"-e"$"-i"$
+Adjective/$"Plural"$"Female"$"-e"$"-i"$

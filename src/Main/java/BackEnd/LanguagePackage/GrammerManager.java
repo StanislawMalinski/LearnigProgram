@@ -1,15 +1,10 @@
 package BackEnd.LanguagePackage;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-
-public class GrammerMaster {
+public class GrammerManager {
     private PersonManager personManager;
     private TensesManager tensesManager;
 
-    public GrammerMaster(){
+    public GrammerManager(){
         personManager = new PersonManager();
         tensesManager = new TensesManager();
     }
