@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Util.FileFormaterPackage.FileFormaterController">
+   <children>
+      <Label fx:id="L_Comunicator" layoutX="14.0" layoutY="369.0" text="Label" />
+      <TextArea fx:id="TA_FIlePreview" editable="false" layoutX="20.0" layoutY="20.0" prefHeight="200.0" prefWidth="560.0" />
+      <TextField fx:id="TF_ExceptionField" editable="false" layoutX="20.0" layoutY="230.0" prefHeight="25.0" prefWidth="560.0" />
+      <TextField fx:id="TF_UserInput" layoutX="20.0" layoutY="265.0" prefHeight="25.0" prefWidth="560.0" />
+      <Button fx:id="B_Compile" layoutX="500.0" layoutY="298.0" mnemonicParsing="false" onAction="#CompilePattern" prefWidth="80.0" text="Compile" />
+      <Button fx:id="B_Submit" layoutX="500.0" layoutY="329.0" mnemonicParsing="false" onAction="#SubmitPattern" prefWidth="80.0" text="Submit" />
+      <CheckBox fx:id="CB_IgnoreLine" layoutX="20.0" layoutY="302.0" mnemonicParsing="false" text="Ignore first line" />
+   </children>
+</AnchorPane>
