@@ -4,11 +4,14 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.CheckBox;
+import javafx.stage.Stage;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -42,8 +45,13 @@ public class FileFormaterController implements Initializable {
         setComunicator(reply);
     }
 
+    //\[\w\] \ans - \def
+
     public void SubmitPattern(ActionEvent event){
-        ;
+        fileFormater.setPattern(TF_UserInput.getText());
+        fileFormater.getStandardReformattedFile();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
     }
 
     private void setComunicator(int i){
@@ -58,12 +66,12 @@ public class FileFormaterController implements Initializable {
                 TF_ExceptionField.setText(FaultyLineIndex + ".  " + FaultyLine);}
             case 3 -> {L_Comunicator.setText("Compiled successfully.");
                 B_Submit.setDisable(false);}
-            case 4 -> {L_Comunicator.setText("Expression should contain \"def\" and \"ans\".");
+            case 4 -> {L_Comunicator.setText("Expression should contain \"\\def\" and \"\\ans\".");
                 B_Submit.setDisable(false);}
         }
     }
 
-    public String getHeadFileIgnoringFirstLine(boolean b){
+    protected String getHeadFileIgnoringFirstLine(boolean b){
         String [] list = fileFormater.getHeadFromFile();
         if(b && list[2] != null)
             return list[1] + "\n"+ list[2];
@@ -78,6 +86,7 @@ public class FileFormaterController implements Initializable {
         fileFormater = new FileFormater(FileEditor.getFile());
         TA_FIlePreview.setText(getHeadFileIgnoringFirstLine(true));
         fileFormater.setIgnoreFirstLine(true);
+        B_Submit.setDisable(true);
         CB_IgnoreLine.setSelected(true);
         CB_IgnoreLine.setOnAction(new EventHandler<javafx.event.ActionEvent>() {
             @Override

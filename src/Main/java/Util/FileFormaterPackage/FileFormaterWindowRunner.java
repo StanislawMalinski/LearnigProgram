@@ -9,23 +9,13 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 
-public class FileFormaterWindowRunner extends Application {
+class FileFormaterWindowRunner{
 
-    private File file;
+    public FileFormaterWindowRunner() {}
 
-    public FileFormaterWindowRunner(){}
-
-    @Override
-    public void start(Stage stage){
-        newFileFormater(stage);
-    }
-
-    public void run(String [] args){
-        launch(args);
-    }
-
-    public void newFileFormater(Stage stage){
+    protected void run(){
         try {
+            Stage stage = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Util/FileFormaterPackage/FileFormaterWindow.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
@@ -35,9 +25,5 @@ public class FileFormaterWindowRunner extends Application {
         }catch (IOException e){
             e.printStackTrace();
         }
-    }
-
-    public void setFile(File file){
-        this.file = file;
     }
 }

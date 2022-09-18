@@ -7,21 +7,24 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
-public class FileFormater {
+class FileFormater {
     private File file;
     private TextField TF;
     private Label Comunicator;
     private boolean ignoreFirstLine;
     private String FaultyLine;
     private int FaultyLineIndex;
+    private Pattern pattern;
+    private Matcher m;
+
+    private boolean patContainHint;
+    private boolean patContainFormat;
+    private boolean patContainAspects;
 
     protected FileFormater(File file){
         this.file = file;
@@ -29,10 +32,8 @@ public class FileFormater {
 
     protected int CompilePattern(String Spattern) {
         try {
-            if( !Spattern.contains("def") || !Spattern.contains("ans")) return 4;
-            Spattern = Spattern.replace("def", "(.*)");
-            Spattern = Spattern.replace("ans", "(.*)");
-            Pattern pattern = Pattern.compile(Spattern);
+            if( !Spattern.contains("\\def") || !Spattern.contains("\\ans")) return 4;
+            Pattern pattern = convertPattern(Spattern);
             if(!isAplicapble(pattern)) return 2;
             return 3;
         } catch (PatternSyntaxException e){
@@ -40,12 +41,18 @@ public class FileFormater {
         }
     }
 
+    private Pattern convertPattern(String pattern){
+        pattern = pattern.replace("\\def", "(?<def>.*)");
+        pattern = pattern.replace("\\ans", "(?<ans>.*)");
+        pattern = pattern.replace("\\hint", "(?<hint>.*)");
+        return Pattern.compile(pattern);
+        //TODO add format and aspects
+    }
+
     private boolean isAplicapble(Pattern pattern){
-        BufferedReader BR = getBufferdReaderForFile();
+        BufferedReader BR = getBufferdReaderForFile(file);
         String line = "";
-        Matcher m;
         int lineNumber = 0;
-        //\[.*\] def -{1} ans
         try {
             while ((line = BR.readLine()) != null){
                 if(lineNumber == 0 && ignoreFirstLine) {
@@ -68,7 +75,7 @@ public class FileFormater {
     }
 
     protected String [] getHeadFromFile(){
-        BufferedReader BR = getBufferdReaderForFile();
+        BufferedReader BR = getBufferdReaderForFile(file);
         String line;
         String firstLine = "";
         String middle = "";
@@ -89,6 +96,7 @@ public class FileFormater {
             out[0] = firstLine;
             out[1] = middle;
             out[2] = endLine;
+            BR.close();
             return out;
         }catch (IOException e){
             e.printStackTrace();
@@ -96,7 +104,7 @@ public class FileFormater {
         return null;
     }
 
-    private BufferedReader getBufferdReaderForFile(){
+    private BufferedReader getBufferdReaderForFile(File file){
         try {
             return new BufferedReader(new FileReader(file));
         } catch (IOException e){
@@ -105,8 +113,84 @@ public class FileFormater {
         return null;
     }
 
-    protected File getReformatedFile(){
-        return new File("");
+    protected File getStandardReformattedFile(){
+        decodeStructureOfPattern();
+        File Reformated = getNewFile();
+        BufferedReader BR = getBufferdReaderForFile(file);
+        BufferedWriter BW = getBufferdWriterForFile(Reformated);
+        String oldLine;
+        String newLine;
+        int line = 0;
+        try {
+            while ((oldLine = BR.readLine()) != null){
+                if(ignoreFirstLine && line == 0) {
+                    line++;
+                    continue;
+                }
+                newLine = getFormatedLine(oldLine, line);
+                BW.write(newLine);
+                line++;
+            }
+            BR.close();
+            BW.close();
+            return Reformated;
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private void decodeStructureOfPattern() {
+        patContainHint = pattern.pattern().contains("(?<hint>");
+        patContainFormat = pattern.pattern().contains("(?<format>");
+        patContainAspects = pattern.pattern().contains("(?<aspect1>");
+    }
+
+    private File getNewFile(){
+        File newFile;
+        String fileName = file.getAbsolutePath();
+        String newFileName;
+        int version = 1;
+        while(true) {
+            newFileName = fileName.replace(".txt", "(" + version + ").txt");
+            newFile = new File(newFileName);
+            try {
+                if (newFile.createNewFile()) {
+                    return newFile;
+                } else
+                    version++;
+            } catch (IOException e) {
+                return null;
+            }
+        }
+    }
+
+    private BufferedWriter getBufferdWriterForFile(File file) {
+        try {
+            return new BufferedWriter(new FileWriter(file));
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private String getFormatedLine(String oldLine, int line){
+        StringBuilder newLine = new StringBuilder();
+        m = pattern.matcher(oldLine);
+        m.matches();
+        newLine.append("$").append(line).append("$");
+        newLine.append("(?<def>").append(m.group("def")).append(")$");
+        newLine.append("(?<ans>").append(m.group("ans")).append(")$");
+        if(patContainHint) newLine.append("(?<hint>").append(m.group("hint")).append(")$");
+        if(patContainFormat) newLine.append("(?<format>").append(m.group("format")).append(")$");
+        for(int i = 0; patContainAspects; i++){
+            if(oldLine.contains("<aspect" + i + ">"))
+                newLine.append("(?<aspect" + i + ">").append(m.group("aspect" + i)).append(")$");
+            else
+                break;
+        }
+        newLine.append("\n");
+        return newLine.toString();
     }
 
     protected String getFaultyLine(){
@@ -119,5 +203,9 @@ public class FileFormater {
 
     protected void setIgnoreFirstLine(boolean b){
         ignoreFirstLine = b;
+    }
+
+    protected void setPattern(String pattern){
+        this.pattern = convertPattern(pattern);
     }
 }

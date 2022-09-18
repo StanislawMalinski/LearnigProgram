@@ -1,7 +1,6 @@
 1. Add cancel button that will cancel whole action.
 4. Add help for regular expressions.
 5. Add button that will reformat file and it will add it to FileKeeper/Subjects/
-6. Complete implementation of Submit button.
 7. Add advanced options.
     7.1. Optional preview of reformat file.
     7.2. Optional hint to regular expression.
@@ -10,4 +9,6 @@
     7.5. Ignore lines that doesn't fit the expression.
     7.6. Highlight lines that match or not the expression.
     7.7. Add non standard reformat.
+    7.8. Add optional information like hint.
+    7.9. Set path where to save the new file.
 8. Move "Ignore first line" button to advanced options.
