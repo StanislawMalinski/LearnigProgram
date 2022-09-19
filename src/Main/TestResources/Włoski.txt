@@ -1,0 +1,9 @@
+Language
+[A] Niebieski - Blu
+[A] Zielony - Verde
+[V] Mieć - Avere ho/hai/ha/abbiamo/avete/hanno
+[V] Latać - Volare
+[V] Spadać - Cadere
+[V] Mówić - Dire
+[N] Kobieta - la Donna
+[N] Mężczyzna - il Uomo

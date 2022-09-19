@@ -56,4 +56,8 @@ public class Material {
         return table;
     }
 
+    public File getFile(){
+        return file;
+    }
+
 }
