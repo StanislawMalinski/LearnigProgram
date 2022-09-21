@@ -33,7 +33,7 @@ class PatternDecoder {
 
     private void getReadingPattern(){
         String StandardPattern = "\\$\\(<id>(?<id>\\d+)\\)\\$\\(<def>(?<def>.+)\\)\\$\\(<ans>(?<ans>.+)\\)\\$";
-        String StatsPattern = "\\(<att>(?<att>\\d+)\\)\\$\\(<suc>(?<suc>\\d+)\\)\\$";
+        String StatsPattern = "\\(<sequence>(?<sequence>.*)\\)\\$\\(<att>(?<att>\\d+)\\)\\$\\(<suc>(?<suc>\\d+)\\)\\$";
         String HintPattern = "(\\(<hint>(?<hint>.+)\\)\\$)";
         String FormatPattern = "(\\(<format>(?<format>.+)\\)\\$)";
         String AsspectsPattern = getAspectsPattern();
@@ -63,6 +63,7 @@ class PatternDecoder {
         question.id = Integer.parseInt(m.group("id"));
         question.definition = m.group("def");
         question.answer = m.group("ans");
+        question.sequence = m.group("sequence");
         question.attempts = Integer.parseInt( m.group("att"));
         question.successes = Integer.parseInt( m.group("suc"));
         if(hasHint)

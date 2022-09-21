@@ -47,11 +47,11 @@ public class Teacher {
     }
 
     public void addAttempt(){
-        material.getQuestion(cursor).addAttempt();
+        material.getQuestion(cursor).attempts++;
     }
 
     public void addSucces(){
-        material.getQuestion(cursor).addSuccess();
+        material.getQuestion(cursor).successes++;
     }
 
     private void nextQuestion() {

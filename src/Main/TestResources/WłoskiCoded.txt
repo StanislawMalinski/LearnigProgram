@@ -1,9 +1,9 @@
-Language
-$(<id>1)$(<def>Niebieski)$(<ans>Blu)$(<att>0)$(<suc>0)$
-$(<id>2)$(<def>Zielony)$(<ans>Verde)$(<att>0)$(<suc>0)$(<hint>Kolor trawy)$
-$(<id>3)$(<def>Mieć)$(<ans>Avere ho/hai/ha/abbiamo/avete/hanno)$(<att>0)$(<suc>0)$(<format>czasownik)$
-$(<id>4)$(<def>Latać)$(<ans>Volare)$(<att>0)$(<suc>0)$(<aspect1>FRUUU)$
-$(<id>5)$(<def>Spadać)$(<ans>Cadere)$(<att>0)$(<suc>0)$(<hint>Możesz to zrobić ze schodów)$(<aspect1>FRUUU)$
-$(<id>6)$(<def>Mówić)$(<ans>Dire)$(<att>0)$(<suc>0)$
-$(<id>7)$(<def>Kobieta)$(<ans>la Donna)$(<att>0)$(<suc>0)$(<hint>Bardzo je lubię)$(<aspect1>FRUUU)$(<aspect2>Najlpesza i najgorsza rzecz na świecie)$
-$(<id>8)$(<def>Mężczyzna)$(<ans>il Uomo)$(<att>0)$(<suc>0)$(<hint>Bardzo ich lubię)$(<format>rzeczownik)$(<aspect1>FRUUU)$(<aspect2>Najlpsza rzecz na świecie)$
+$(<lastLearned>2022-09-21)$(<time>0:0)$
+$(<id>0)$(<def>Niebieski)$(<ans>Blu)$(<sequence>)$(<att>0)$(<suc>0)$
+$(<id>1)$(<def>Zielony)$(<ans>Verde)$(<sequence>)$(<att>0)$(<suc>0)$(<hint>Kolor trawy)$
+$(<id>2)$(<def>Mieć)$(<ans>Avere ho/hai/ha/abbiamo/avete/hanno)$(<sequence>)$(<att>0)$(<suc>0)$(<format>czasownik)$
+$(<id>3)$(<def>Latać)$(<ans>Volare)$(<sequence>)$(<att>0)$(<suc>0)$(<aspect1>FRUUU)$
+$(<id>4)$(<def>Spadać)$(<ans>Cadere)$(<sequence>)$(<att>0)$(<suc>0)$(<hint>Możesz to zrobić ze schodów)$(<aspect1>FRUUU)$
+$(<id>5)$(<def>Mówić)$(<ans>Dire)$(<sequence>)$(<att>0)$(<suc>0)$
+$(<id>6)$(<def>Kobieta)$(<ans>la Donna)$(<sequence>)$(<att>0)$(<suc>0)$(<hint>Bardzo je lubię)$(<aspect1>FRUUU)$(<aspect2>Najlpesza i najgorsza rzecz na świecie)$
+$(<id>7)$(<def>Mężczyzna)$(<ans>il Uomo)$(<sequence>)$(<att>0)$(<suc>0)$(<hint>Bardzo ich lubię)$(<format>rzeczownik)$(<aspect1>FRUUU)$(<aspect2>Najlpsza rzecz na świecie)$

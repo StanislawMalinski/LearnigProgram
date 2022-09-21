@@ -1,11 +1,8 @@
 package Util.FileFormaterPackage;
 
-import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
+import BackEnd.Question;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
 
 import java.io.*;
 import java.util.regex.Matcher;
@@ -16,7 +13,7 @@ class FileFormater {
     private File file;
     private TextField TF;
     private Label Comunicator;
-    private boolean ignoreFirstLine;
+    private boolean FirstLineAsATittle;
     private String FaultyLine;
     private int FaultyLineIndex;
     private Pattern pattern;
@@ -55,7 +52,7 @@ class FileFormater {
         int lineNumber = 0;
         try {
             while ((line = BR.readLine()) != null){
-                if(lineNumber == 0 && ignoreFirstLine) {
+                if(lineNumber == 0 && FirstLineAsATittle) {
                     lineNumber++;
                     continue;
                 }
@@ -72,6 +69,15 @@ class FileFormater {
             e.printStackTrace();
         }
         return false;
+    }
+
+    protected String getFirstLine() {
+        BufferedReader BR = getBufferdReaderForFile(file);
+        try {
+            return BR.readLine();
+        } catch (IOException e){
+            return null;
+        }
     }
 
     protected String [] getHeadFromFile(){
@@ -123,12 +129,12 @@ class FileFormater {
         int line = 0;
         try {
             while ((oldLine = BR.readLine()) != null){
-                if(ignoreFirstLine && line == 0) {
-                    line++;
-                    continue;
+                if(FirstLineAsATittle && line == 0) {
+                    BW.write(oldLine + "\n");
+                } else {
+                    newLine = getFormatedLine(oldLine, line);
+                    BW.write(newLine);
                 }
-                newLine = getFormatedLine(oldLine, line);
-                BW.write(newLine);
                 line++;
             }
             BR.close();
@@ -178,14 +184,17 @@ class FileFormater {
         StringBuilder newLine = new StringBuilder();
         m = pattern.matcher(oldLine);
         m.matches();
-        newLine.append("$").append(line).append("$");
-        newLine.append("(?<def>").append(m.group("def")).append(")$");
-        newLine.append("(?<ans>").append(m.group("ans")).append(")$");
-        if(patContainHint) newLine.append("(?<hint>").append(m.group("hint")).append(")$");
-        if(patContainFormat) newLine.append("(?<format>").append(m.group("format")).append(")$");
+        newLine.append("$(<id>").append(line).append(")$");
+        newLine.append("(<def>").append(m.group("def")).append(")$");
+        newLine.append("(<ans>").append(m.group("ans")).append(")$");
+        newLine.append("(<sequence>)$");
+        newLine.append("(<att>0)$");
+        newLine.append("(<suc>0)$");
+        if(patContainHint) newLine.append("(<hint>").append(m.group("hint")).append(")$");
+        if(patContainFormat) newLine.append("(<format>").append(m.group("format")).append(")$");
         for(int i = 0; patContainAspects; i++){
             if(oldLine.contains("<aspect" + i + ">"))
-                newLine.append("(?<aspect" + i + ">").append(m.group("aspect" + i)).append(")$");
+                newLine.append("(<aspect" + i + ">").append(m.group("aspect" + i)).append(")$");
             else
                 break;
         }
@@ -201,8 +210,8 @@ class FileFormater {
         return FaultyLineIndex;
     }
 
-    protected void setIgnoreFirstLine(boolean b){
-        ignoreFirstLine = b;
+    protected void setFirstLineAsATittle(boolean b){
+        FirstLineAsATittle = b;
     }
 
     protected void setPattern(String pattern){

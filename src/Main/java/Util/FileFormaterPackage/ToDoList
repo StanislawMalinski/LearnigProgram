@@ -11,4 +11,5 @@
     7.7. Add non standard reformat.
     7.8. Add optional information like hint.
     7.9. Set path where to save the new file.
+    7.10. Optional aspects to regular expression.
 8. Move "Ignore first line" button to advanced options.

@@ -16,7 +16,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class FileFormaterController implements Initializable {
-
     @FXML
     TextArea TA_FIlePreview;
 
@@ -36,7 +35,7 @@ public class FileFormaterController implements Initializable {
     Button B_Submit;
 
     @FXML
-    CheckBox CB_IgnoreLine;
+    CheckBox CB_FLineAsATittle;
 
     private FileFormater fileFormater;
 
@@ -85,14 +84,14 @@ public class FileFormaterController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         fileFormater = new FileFormater(FileEditor.getFile());
         TA_FIlePreview.setText(getHeadFileIgnoringFirstLine(true));
-        fileFormater.setIgnoreFirstLine(true);
+        fileFormater.setFirstLineAsATittle(true);
         B_Submit.setDisable(true);
-        CB_IgnoreLine.setSelected(true);
-        CB_IgnoreLine.setOnAction(new EventHandler<javafx.event.ActionEvent>() {
+        CB_FLineAsATittle.setSelected(true);
+        CB_FLineAsATittle.setOnAction(new EventHandler<javafx.event.ActionEvent>() {
             @Override
             public void handle(javafx.event.ActionEvent event) {
-                TA_FIlePreview.setText(getHeadFileIgnoringFirstLine(CB_IgnoreLine.isSelected()));
-                fileFormater.setIgnoreFirstLine(CB_IgnoreLine.isSelected());
+                TA_FIlePreview.setText(getHeadFileIgnoringFirstLine(CB_FLineAsATittle.isSelected()));
+                fileFormater.setFirstLineAsATittle(CB_FLineAsATittle.isSelected());
             }
         });
     }

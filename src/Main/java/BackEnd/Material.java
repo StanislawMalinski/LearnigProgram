@@ -1,26 +1,26 @@
 package BackEnd;
 
+import BackEnd.ReaderPackage.Reader;
 import Util.QuestionList;
 
-import java.util.AbstractList;
+import java.sql.Time;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.io.File;
+import java.util.List;
 
 public class Material {
     private File file;
-    private QuestionList questions;
+    private List<Question> questions;
     private Comparator<Question> comparator = new Comparator<Question>() {@Override public int compare(Question o1, Question o2) {return o1.compareTo(o2);}};
     private TypeOfData type;
+    private int timeInSeconds;
+    private int StartTime;
 
     public Material(File file) {
+        Reader reader = new Reader(file);
         this.file = file;
-        questions = new QuestionList();
-    }
-
-    public Material(QuestionList questionslist, TypeOfData type) {
-        this.questions = questionslist;
-        this.type = type;
+        questions = reader.read();
     }
 
     public void setType(TypeOfData type){
@@ -60,4 +60,21 @@ public class Material {
         return file;
     }
 
+    public void setFile(File file){
+        this.file = file;
+    }
+
+    public void startTime(){
+        StartTime = Math.round(Math.round(System.currentTimeMillis()));
+    }
+
+    public void stopTime(){
+        int StopTime = Math.round(Math.round(System.currentTimeMillis()));
+        int delta = StopTime - StartTime;
+        timeInSeconds += Math.round(delta/1000);
+    }
+
+    public int getTime() {
+        return timeInSeconds;
+    }
 }

@@ -4,23 +4,25 @@ import BackEnd.Material;
 import BackEnd.Question;
 import BackEnd.TypeOfData;
 import Util.Information;
+import Util.QuestionList;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.InvalidPropertiesFormatException;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Reader {
     private File file;
-    private Material material;
+    private List<Question> list;
 
     public Reader() {}
 
     public Reader(File file) {
         this.file = file;
+        list = new QuestionList();
     }
 
     public String[] getSubjects() {
@@ -28,17 +30,15 @@ public class Reader {
         return file.list();
     }
 
-    public Material read() {
-        material = new Material(file);
+    public List<Question> read() {
         BufferedReader bufReader = getBufferdReader();
         try {
-            readInformation(bufReader);
             readQuestions(bufReader);
         } catch(IOException er) {
             er.printStackTrace();
             return null;
         }
-        return material;
+        return list;
     }
 
     public BufferedReader getBufferdReader(){
@@ -51,26 +51,18 @@ public class Reader {
         return null;
     }
 
-    private void readInformation(BufferedReader bufferedReader) throws IOException {
-        String firstLine = bufferedReader.readLine();
-        if (firstLine.equalsIgnoreCase("language"))
-            material.setType(TypeOfData.LANGUAGE);
-        else if (firstLine.equalsIgnoreCase("flaschcards"))
-            material.setType(TypeOfData.FLASHCARDS);
-        else
-            throw new InvalidPropertiesFormatException("First line is not type of data \"" + firstLine + "\"");
-    }
-
     private void readQuestions(BufferedReader bufferedReader) throws IOException{
         String line;
+        int lineNumber = 0;
         while((line = bufferedReader.readLine()) != null){
-            readQuestionFromALine(line);
+            if(lineNumber++ == 0) continue;
+                readQuestionFromALine(line);
         }
     }
 
     private void readQuestionFromALine(String line){
         PatternDecoder patternDecoder = new PatternDecoder(line);
         Question question = patternDecoder.getQuestion();
-        material.addQuestion(question);
+        list.add(question);
     }
 }

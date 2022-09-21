@@ -1,6 +1,7 @@
 package BackEnd;
 
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.Objects;
 
 public class Question implements Comparable<Question>{
@@ -15,6 +16,17 @@ public class Question implements Comparable<Question>{
     public String [] aspects;
     public String [] nameOfAspects;
     public int numberOfAspects;
+    public String sequence = "";
+
+    public void addAttempt(){
+        sequence += "a";
+        attempts++;
+    }
+
+    public void addSuccess(){
+        sequence += "s";
+        successes++;
+    }
 
     public Question(){
         aspects = new String[0];
@@ -31,6 +43,8 @@ public class Question implements Comparable<Question>{
         nameOfAspects = NnameOfAspects;
         numberOfAspects ++;
     }
+
+
 
     @Override
     public boolean equals(Object o){

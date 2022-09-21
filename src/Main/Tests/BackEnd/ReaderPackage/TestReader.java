@@ -25,8 +25,7 @@ public class TestReader {
     @Before
     public void Initialize(){
         file = new File("src/Main/TestResources/WłoskiCoded.txt");
-        reader = new Reader(file);
-        material = reader.read();
+        material = new Material(file);
     }
 
     @Before
