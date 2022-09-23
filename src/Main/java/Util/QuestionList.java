@@ -41,12 +41,25 @@ public class QuestionList implements List<Question> {
 
     @Override
     public Iterator<Question> iterator() {
-        return null;
+        Iterator<Question> iter = new Iterator<Question>() {
+            private int cursor = 0;
+
+            @Override
+            public boolean hasNext() {
+                return cursor < N;
+            }
+
+            @Override
+            public Question next() {
+                return table[cursor++];
+            }
+        };
+        return iter;
     }
 
     @Override
     public Object[] toArray() {
-        return new Object[0];
+        return table;
     }
 
     @Override
@@ -56,7 +69,7 @@ public class QuestionList implements List<Question> {
 
     @Override
     public boolean add(Question question) {
-        if( N+1 >= size ) doubleSize();
+        if( N >= size ) doubleSize();
         table[N++] = question;
         return true;
     }
@@ -113,7 +126,9 @@ public class QuestionList implements List<Question> {
 
     @Override
     public Question set(int index, Question element) {
-        return null;
+        Question tmp = table[index];
+        table[index] = element;
+        return tmp;
     }
 
     @Override
@@ -128,7 +143,17 @@ public class QuestionList implements List<Question> {
 
     @Override
     public int indexOf(Object o) {
-        return 0;
+        Question question;
+        try{
+            question = (Question) o;
+        } catch (ClassCastException e){
+            return -1;
+        }
+        for (int i = 0; i < N; i++) {
+           if(question.id == table[i].id)
+               return -1;
+        }
+        return -1;
     }
 
     @Override
@@ -136,8 +161,39 @@ public class QuestionList implements List<Question> {
         return 0;
     }
 
+    private void quickSort(int begin, int end) {
+        if (begin < end) {
+            int partitionIndex = partition(begin, end);
+
+            quickSort(begin, partitionIndex-1);
+            quickSort(partitionIndex+1, end);
+        }
+    }
+
+    private int partition(int begin, int end) {
+        Question pivot = table[end];
+        int i = (begin-1);
+
+        for (int j = begin; j < end; j++) {
+            if (table[j].compareTo(pivot) >= 0) {
+                i++;
+
+                Question swapTemp = table[i];
+                table[i] = table[j];
+                table[j] = swapTemp;
+            }
+        }
+
+        Question swapTemp = table[i+1];
+        table[i+1] = table[end];
+        table[end] = swapTemp;
+
+        return i+1;
+    }
+
     @Override
     public ListIterator<Question> listIterator() {
+        quickSort(0,N-1);
         return null;
     }
 

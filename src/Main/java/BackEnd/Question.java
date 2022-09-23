@@ -1,9 +1,5 @@
 package BackEnd;
 
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.Objects;
-
 public class Question implements Comparable<Question>{
     public String definition;
     public String answer;

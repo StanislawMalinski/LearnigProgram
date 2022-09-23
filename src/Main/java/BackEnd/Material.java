@@ -1,9 +1,7 @@
 package BackEnd;
 
 import BackEnd.ReaderPackage.Reader;
-import Util.QuestionList;
 
-import java.sql.Time;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.io.File;
@@ -12,7 +10,12 @@ import java.util.List;
 public class Material {
     private File file;
     private List<Question> questions;
-    private Comparator<Question> comparator = new Comparator<Question>() {@Override public int compare(Question o1, Question o2) {return o1.compareTo(o2);}};
+    private Comparator<Question> comparator = new Comparator<Question>() {
+        @Override
+        public int compare(Question o1, Question o2) {
+            return  o1.compareTo(o2);
+        }
+    };
     private TypeOfData type;
     private int timeInSeconds;
     private int StartTime;
@@ -23,8 +26,18 @@ public class Material {
         questions = reader.read();
     }
 
-    public void setType(TypeOfData type){
-        this.type = type;
+    public Material(String filePath) {
+        file = new File(filePath);
+        Reader reader = new Reader(file);
+        this.file = file;
+        questions = reader.read();
+    }
+
+    public Question [] getQuestions(int numberOfLessons){
+        Question [] lessons = new Question[numberOfLessons];
+        questions.listIterator(); // Sorting list
+        System.arraycopy(questions.toArray(),0,lessons,0,numberOfLessons);
+        return lessons;
     }
 
     public TypeOfData getType(){
@@ -40,10 +53,16 @@ public class Material {
             questions.add(question);
     }
 
-    public Question getQuestion(int id){
-        if(id >= 0 && id < questions.size())
-            return questions.get(id);
+    public Question getQuestion(int index){
+        if(index >= 0 && index < questions.size())
+            return questions.get(index);
         return null;
+    }
+
+    public int getIndexOfQuestionWithId(int id){
+        Question question = new Question();
+        question.id = id;
+        return questions.indexOf(question);
     }
 
     public int getSize(){
@@ -76,5 +95,14 @@ public class Material {
 
     public int getTime() {
         return timeInSeconds;
+    }
+
+    public void showQuestions() {
+        Iterator<Question> iter = questions.iterator();
+        Question question;
+        while(iter.hasNext()) {
+            question = iter.next();
+            System.out.println("id: " + question.id + "|attempts: " + question.attempts + "|success: " + question.successes);
+        }
     }
 }
