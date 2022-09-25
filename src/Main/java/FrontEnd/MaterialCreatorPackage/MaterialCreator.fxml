@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontEnd.MaterialCreatorPackage.MaterialCreatorController">
+   <children>
+      <ScrollPane fx:id="SP_Display" layoutX="20.0" layoutY="20.0" pannable="true" prefHeight="204.0" prefWidth="560.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="196.0" prefWidth="556.0">
+               <children>
+                  <Pane fx:id="P_QuestionDisplay" prefHeight="200.0" prefWidth="560.0" />
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+      <Label layoutX="20.0" layoutY="239.0" text="Definition" />
+      <Label layoutX="20.0" layoutY="269.0" text="Answer" />
+      <Label fx:id="L_Hint" layoutX="20.0" layoutY="299.0" text="Hint" />
+      <Label fx:id="L_Format" layoutX="20.0" layoutY="329.0" text="Format" />
+       <TextField fx:id="TF_Definition" layoutX="86.0" layoutY="234.0" />
+      <TextField fx:id="TF_Answer" layoutX="86.0" layoutY="264.0" />
+      <TextField fx:id="TF_Hint" layoutX="86.0" layoutY="294.0" />
+      <TextField fx:id="TF_Format" layoutX="86.0" layoutY="324.0" />
+       <TextField fx:id="TF_Search" layoutX="321.0" layoutY="234.0" />
+      <Button fx:id="B_Add" layoutX="530.0" layoutY="235.0" mnemonicParsing="false" onAction="#addQuestion" prefWidth="50.0" text="Add" />
+      <Button fx:id="B_Complete" layoutX="500.0" layoutY="360.0" mnemonicParsing="false" onAction="#Complete" prefWidth="80.0" text="Complete" />
+      <Label layoutX="270.0" layoutY="239.0" text="Search" />
+   </children>
+</AnchorPane>
