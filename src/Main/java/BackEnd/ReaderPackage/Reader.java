@@ -1,8 +1,6 @@
 package BackEnd.ReaderPackage;
 
-import BackEnd.Material;
 import BackEnd.Question;
-import BackEnd.TypeOfData;
 import Util.Information;
 import Util.QuestionList;
 
@@ -10,13 +8,10 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Reader {
     private File file;
-    private List<Question> list;
+    private QuestionList list;
 
     public Reader() {}
 
@@ -30,7 +25,7 @@ public class Reader {
         return file.list();
     }
 
-    public List<Question> read() {
+    public QuestionList read() {
         BufferedReader bufReader = getBufferdReader();
         try {
             readQuestions(bufReader);
