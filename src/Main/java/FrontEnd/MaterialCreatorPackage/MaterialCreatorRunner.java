@@ -9,6 +9,7 @@ import java.io.IOException;
 
 class MaterialCreatorRunner{
     private MaterialCreator materialCreator;
+    private Stage stage;
     protected MaterialCreatorRunner(MaterialCreator materialCreator){
         this.materialCreator = materialCreator;
     }
@@ -17,7 +18,7 @@ class MaterialCreatorRunner{
     //- OpenCreatorWindow(Stage stage)
     //- OpenBasicInfoWindow(Stage stage)
 
-    protected void OpenCreatorWindow(Stage stage){
+    protected void OpenCreatorWindow(){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/FrontEnd/MaterialCreatorPackage/MaterialCreator.fxml"));
             Parent root = loader.load();
@@ -37,12 +38,13 @@ class MaterialCreatorRunner{
         }
     }
 
-    protected void OpenBasicInfoWindow(Stage stage){
+    protected void OpenBasicInfoWindow(){
         try {
+            stage = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/FrontEnd/MaterialCreatorPackage/MaterialCreatorBasicInfo.fxml"));
             Parent root = loader.load();
             MaterialCreatorBasicInfoController MCBIC = loader.getController();
-            MCBIC.setOnCreateSetAction(a -> OpenCreatorWindow(stage));
+            MCBIC.setOnCreateSetAction(a -> OpenCreatorWindow());
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.setIconified(false);

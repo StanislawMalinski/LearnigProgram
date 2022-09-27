@@ -9,23 +9,29 @@
 <?import javafx.scene.layout.Pane?>
 
 <AnchorPane prefHeight="900.0" prefWidth="1203.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontEnd.MainController">
-   <children>
+    <children>
       <Pane layoutX="500.0" prefHeight="400.0" prefWidth="100.0" />
-      <MenuBar prefHeight="30.0" prefWidth="1440.0">
+      <MenuBar prefHeight="30.0" prefWidth="1440.0" styleClass="menu-bar">
         <menus>
-          <Menu fx:id="MenuHelpButton" mnemonicParsing="false" onAction="#MenuHelp" text="Help" />
-            <Menu fx:id="FileButton" mnemonicParsing="false" text="File">
+          <Menu fx:id="MenuHelpButton" mnemonicParsing="false" onAction="#MenuHelp" styleClass="menu-option" text="Help">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="Regular Expresion" />
+               </items></Menu>
+            <Menu fx:id="FileButton" mnemonicParsing="false" styleClass="menu-option" text="File">
               <items>
                 <MenuItem fx:id="AddFileButton" mnemonicParsing="false" onAction="#AddFile" text="Add File" />
                   <MenuItem fx:id="RemoveFIleButton" mnemonicParsing="false" onAction="#RemoveFile" text="Remove File" />
                   <MenuItem fx:id="EditFileButton" mnemonicParsing="false" onAction="#EditFile" text="Edit FIle" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem fx:id="AddProblemButton" mnemonicParsing="false" onAction="#AddProblem" text="Add problem" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem fx:id="FileReformater" mnemonicParsing="false" onAction="#FileReformater" text="Set Generator Reformat" />
+                  <MenuItem fx:id="SetCreator" mnemonicParsing="false" onAction="#CreateNewSet" text="Set Creator" />
               </items>
             </Menu>
-            <Menu fx:id="SettingButton" mnemonicParsing="false" onAction="#Setting" text="Setting" />
-            <Menu fx:id="StatsButton" mnemonicParsing="false" onAction="#Stats" text="Stats" />
-            <Menu mnemonicParsing="false" text="Learn">
+            <Menu fx:id="SettingButton" mnemonicParsing="false" onAction="#Setting" styleClass="menu-option" text="Setting" />
+            <Menu fx:id="StatsButton" mnemonicParsing="false" onAction="#Stats" styleClass="menu-option" text="Stats" />
+            <Menu mnemonicParsing="false" styleClass="menu-option" text="Learn">
               <items>
                 <MenuItem fx:id="PickTheSubjectButton" mnemonicParsing="false" onAction="#PickTheSubject" text="Pick the subject" />
                   <Menu fx:id="SetLearningModeButton" disable="true" mnemonicParsing="false" text="Set Learning Mode">

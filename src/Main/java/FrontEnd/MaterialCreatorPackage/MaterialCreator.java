@@ -45,12 +45,12 @@ public class MaterialCreator {
     //TODO remove Stage as a argument from
     //- run(Stage stage)
 
-    public void runBasicInfoWindow(Stage stage){
-        MCR.OpenBasicInfoWindow(stage);
+    public void runBasicInfoWindow(){
+        MCR.OpenBasicInfoWindow();
     }
 
-    public void runCreatorWindow(Stage stage){
-        MCR.OpenCreatorWindow(stage);
+    public void runCreatorWindow(){
+        MCR.OpenCreatorWindow();
     }
 
     public static void setName(String Name){

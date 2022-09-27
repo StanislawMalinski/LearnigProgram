@@ -17,13 +17,6 @@ public class Updater {
         this.material = material;
     }
 
-    public void replaceFiles(){
-        String pathName = material.getFile().getPath();
-        material.getFile().delete();
-        file.renameTo(new File(pathName));
-        file = null;
-    }
-
     public void removeTmpFile(){
         file.delete();
     }
@@ -48,6 +41,35 @@ public class Updater {
         return file;
     }
 
+    public File generateNewFile(boolean shouldReplaceFile) throws IOException{
+        String path = material.getFile().getPath().replaceFirst("/" + material.getFile().getName(), "/");
+        file = new File(path + "tmp" + material.getFile().getName());
+        BufferedWriter BW = null;
+        file.createNewFile();
+        BW = new BufferedWriter(new FileWriter(file));
+        Iterator<Question> iter = material.Iterator();
+        Question question;
+        String info = createInfoLine();
+        BW.write(info);
+        String line;
+        while(iter.hasNext()) {
+            question = iter.next();
+            line = createLine(question);
+            BW.write(line);
+        }
+        BW.close();
+        if(shouldReplaceFile)
+            replaceFiles();
+        return file;
+    }
+
+    private void replaceFiles(){
+        String pathName = material.getFile().getPath();
+        material.getFile().delete();
+        file.renameTo(new File(pathName));
+        file = null;
+    }
+
     private String createInfoLine(){
         LocalDate myObj = LocalDate.now();
         int time = material.getTime();
@@ -65,12 +87,12 @@ public class Updater {
         line.append("$(<att>").append(question.attempts).append(")");
         line.append("$(<suc>").append(question.successes).append(")");
         if(question.hint != null)
-            line.append("$(<hint").append(question.hint).append(")");
+            line.append("$(<hint>").append(question.hint).append(")");
         if(question.format != null)
             line.append("$(<format>").append(question.format).append(")");
         for(int i = 0; i < question.numberOfAspects; i++)
             line.append("$(<asspect" + i + ">").append(question.aspects[i]).append(")");
-        line.append("\n");
+        line.append("$\n");
         return line.toString();
     }
 

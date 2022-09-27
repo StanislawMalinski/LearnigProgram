@@ -7,12 +7,14 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
@@ -96,9 +98,11 @@ public class MaterialCreatorController implements Initializable {
         Question question;
         for(int i = 0; i < cursorTable; i++){
             question = new Question();
+            question.id = i;
             question.definition = table[i].getDefinition();
             question.answer = table[i].getAnswer();
-            question.hint = table[i].getHint();
+            if(containsHint)
+                question.hint = table[i].getHint();
             material.addQuestion(question);
         }
         File file = new File(Information.locationOfTheSubjects + setsName);
@@ -109,6 +113,9 @@ public class MaterialCreatorController implements Initializable {
         }
         material.setFile(file);
         material.updateMySelf();
+
+        Stage stage = (Stage) ((Node) e.getSource() ).getScene().getWindow();
+        stage.close();
     }
 
     public void addQuestion(ActionEvent e){

@@ -1,17 +1,11 @@
 package FrontEnd.MaterialCreatorPackage;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
 
-import javax.swing.event.ChangeEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.function.Consumer;

@@ -1,10 +1,10 @@
 package FrontEnd;
 
-import BackEnd.LearningModePackage.Flashcards;
 import BackEnd.LearningModePackage.LearningMode;
 import BackEnd.Material;
-import BackEnd.Reader;
 import BackEnd.Teacher;
+import FrontEnd.FileFormaterPackage.FileEditor;
+import FrontEnd.MaterialCreatorPackage.MaterialCreator;
 import Util.FileMaintenance;
 import Util.SubjectChooser;
 import javafx.event.ActionEvent;
@@ -15,7 +15,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -36,6 +36,10 @@ public class MainController implements Initializable {
     MenuItem EditFileButton;
     @FXML
     MenuItem AddProblemButton;
+    @FXML
+    MenuItem FileReformater;
+    @FXML
+    MenuItem SetCreator;
     @FXML
     MenuItem SettingButton;
     @FXML
@@ -81,6 +85,24 @@ public class MainController implements Initializable {
     public void AddProblem(ActionEvent e) {
     }
 
+    public void FileReformater(ActionEvent e){
+        File choosed = getFileChooserWithTitle("Choose file to reformat.");
+        FileEditor FD = new FileEditor(choosed);
+        FD.getFileFormaterWindow();
+    }
+
+    public void CreateNewSet(ActionEvent e){
+        MaterialCreator materialCreator = new MaterialCreator();
+        materialCreator.runBasicInfoWindow();
+    }
+
+    public File getFileChooserWithTitle(String title){
+        FileChooser FC = new FileChooser();
+        FC.setTitle(title);
+        FC.getExtensionFilters().add(new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt"));
+        return FC.showOpenDialog(stage);
+    }
+
     public void Setting(ActionEvent e) {
     }
 
@@ -94,8 +116,7 @@ public class MainController implements Initializable {
 
     private void readMaterial(String fileName){
         File file = new File(fileName);
-        Reader reader = new Reader(file);
-        material = reader.read();
+        material = new Material(file);
         SetLearningModeButton.setDisable(material == null);
     }
 
@@ -123,8 +144,13 @@ public class MainController implements Initializable {
         teacher = new Teacher(material);
         teacher.setTeachingTool(learningMode);
         AnswerPlatfromPane.getChildren().add(teacher.getPlatformAnswer());
-        teacher.teach();
+        teacher.startLesson();
         stage.getScene().setOnKeyPressed(teacher.getHandler());
+        teacher.setResetKeyHandlar(a -> resetHandler());
+    }
+
+    public void resetHandler(){
+        stage.getScene().setOnKeyPressed(null);
     }
 
     @Override
