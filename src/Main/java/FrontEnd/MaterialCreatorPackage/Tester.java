@@ -11,6 +11,6 @@ public class Tester extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         MaterialCreator mC = new MaterialCreator();
-        mC.runBasicInfoWindow(stage);
+        mC.runBasicInfoWindow();
     }
 }

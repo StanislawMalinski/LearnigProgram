@@ -9,7 +9,6 @@ import javafx.scene.control.Label;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Pane;
@@ -17,20 +16,12 @@ import javafx.scene.paint.Color;
 
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import java.util.EventListener;
 
 public class Flashcards implements LearnMode{
     private Question question;
-    private int questionIndex;
     private Label lable;
     private Pane flashcard;
-    private boolean isQuestionShown;
-    private int levelOfLearningProces;
-    /*
-0 - Not learned yet
-1 - Shown once
-n - revied n times
-*/
+    private boolean isDefinitionShown;
     private static boolean learnByDefinition = true;
 
     public Flashcards(){}
@@ -88,11 +79,11 @@ n - revied n times
     public void showQuestion(){
         String text;
         if( learnByDefinition) {
-            text = GenerateLabelTableFor(question.getDefinition());
-            isQuestionShown = false;
+            text = GenerateLabelTableFor(question.definition);
+            isDefinitionShown = true;
         }else {
-            text = GenerateLabelTableFor(question.getQuestion());
-            isQuestionShown = true;
+            text = GenerateLabelTableFor(question.answer);
+            isDefinitionShown = false;
         }
         lable.setText(text);
     }
@@ -113,20 +104,19 @@ n - revied n times
     }
 
     @Override
-    public void setQuestion(Question question, int questionIndex) {
+    public void setQuestion(Question question) {
         if(question == null) throw new NullPointerException();
         this.question = question;
-        this.questionIndex = questionIndex;
     }
 
     private void FlipFlashCard(){
         String text;
-        if(isQuestionShown) {
-            text = GenerateLabelTableFor(question.getDefinition());
-            isQuestionShown = false;
+        if(isDefinitionShown) {
+            text = GenerateLabelTableFor(question.answer);
+            isDefinitionShown = false;
         } else {
-            text = GenerateLabelTableFor(question.getQuestion());
-            isQuestionShown = true;
+            text = GenerateLabelTableFor(question.definition);
+            isDefinitionShown = true;
         }
         lable.setText(text);
     }
@@ -142,10 +132,16 @@ n - revied n times
                 } else if (keyEvent.getCode() == KeyCode.D || keyEvent.getCode() == KeyCode.RIGHT ){
                     Teacher.getTeacher().addSucces();
                     Teacher.getTeacher().addAttempt();
-                    Teacher.getTeacher().next();
+                    if(Teacher.hasNext())
+                        Teacher.getTeacher().next();
+                    else
+                        Teacher.finishLesson();
                 } else if (keyEvent.getCode() == KeyCode.A || keyEvent.getCode() == KeyCode.LEFT ) {
                     Teacher.getTeacher().addAttempt();
-                    Teacher.getTeacher().next();
+                    if(Teacher.hasNext())
+                        Teacher.getTeacher().next();
+                    else
+                        Teacher.finishLesson();
                 }
             }
         };

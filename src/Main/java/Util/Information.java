@@ -47,9 +47,9 @@ public abstract class Information {
         return size.getWidth();
     }
 
-    public static String locationOfTheSubjects = "FileKeeper/Subjects";
+    public static String locationOfTheSubjects = "FileKeeper/Subjects/";
 
-    public static String loactionOfTheStats = "FileKeeper/Stats";
+    public static String loactionOfTheStats = "FileKeeper/Stats/";
 }
 
 

@@ -13,7 +13,7 @@ public interface LearnMode {
 
     public void showQuestion();
 
-    public void setQuestion(Question question, int questionIndex);
+    public void setQuestion(Question question);
 
     public EventHandler<KeyEvent> getHandler();
 

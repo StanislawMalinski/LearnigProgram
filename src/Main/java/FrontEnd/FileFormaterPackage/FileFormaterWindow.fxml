@@ -7,7 +7,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Util.FileFormaterPackage.FileFormaterController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontEnd.FileFormaterPackage.FileFormaterController">
    <children>
       <Label fx:id="L_Comunicator" layoutX="14.0" layoutY="369.0" text="Label" />
       <TextArea fx:id="TA_FIlePreview" editable="false" layoutX="20.0" layoutY="20.0" prefHeight="200.0" prefWidth="560.0" />

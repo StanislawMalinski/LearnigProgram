@@ -63,6 +63,11 @@ public class Question implements Comparable<Question>{
     }
 
     @Override
+    public String toString(){
+        return "id: " + id + "|def: " + definition + "|attempts/succes" + attempts + "/" + successes;
+    }
+
+    @Override
     public int compareTo(Question o) {
         return (this.attempts - o.attempts - this.successes + o.successes);
     }

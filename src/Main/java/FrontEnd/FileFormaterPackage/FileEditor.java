@@ -1,6 +1,4 @@
-package Util.FileFormaterPackage;
-
-import javafx.stage.Stage;
+package FrontEnd.FileFormaterPackage;
 
 import java.io.File;
 

@@ -1,9 +1,7 @@
 package Util;
 
-import BackEnd.Material;
-import BackEnd.Reader;
-import FrontEnd.FileChooserController;
-import FrontEnd.MainController;
+import BackEnd.IOEPackage.Reader;
+import FrontEnd.FileChooserPackage.FileChooserController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -20,14 +18,13 @@ public class SubjectChooser {
     public SubjectChooser(){
         Reader reader = new Reader();
         String[] subjects = reader.getSubjects();
-
         fileChooserPopupWindow(subjects);
     }
 
     public void fileChooserPopupWindow(String [] options){
         try {
             Stage stage = new Stage();
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FileChooser.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/FrontEnd/FileChooserPackage/FileChooser.fxml"));
             Parent root = fxmlLoader.load();
             FCC = fxmlLoader.getController();
             FCC.setSubjects(options);

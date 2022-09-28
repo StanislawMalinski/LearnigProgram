@@ -1,0 +1,21 @@
+.root
+{
+    -fx-background-color: white;
+}
+
+#menu-bar
+{
+    -fx-background-color: #444444;
+}
+
+.menu
+{
+    -fx-border-width: 0px 2px 0px 2px ;
+    -fx-border-color: black;
+    -fx-border-style: dotted;
+}
+
+.menu:hover
+{
+    -fx-background-color: gray;
+}
