@@ -59,7 +59,7 @@ public class Writer {
         if(question.format != null)
             line.append("$(<format>").append(question.format).append(")");
         for(int i = 0; i < question.numberOfAspects; i++)
-            line.append("$(<asspect" + i + ">").append(question.aspects[i]).append(")");
+            line.append("$(<aspect" + i + ">").append(question.aspects[i]).append(")");
         line.append("$\n");
         return line.toString();
     }
