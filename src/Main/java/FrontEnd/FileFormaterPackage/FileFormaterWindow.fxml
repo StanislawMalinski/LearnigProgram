@@ -3,6 +3,8 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -12,12 +14,40 @@
    <children>
       <Label fx:id="L_Comunicator" layoutX="14.0" layoutY="369.0" text="Label" />
       <TextArea fx:id="TA_FIlePreview" editable="false" layoutX="20.0" layoutY="20.0" prefHeight="200.0" prefWidth="560.0" />
-      <TextField fx:id="TF_ExceptionField" editable="false" layoutX="20.0" layoutY="230.0" prefHeight="25.0" prefWidth="560.0" />
-      <TextField fx:id="TF_UserInput" layoutX="20.0" layoutY="265.0" prefHeight="25.0" prefWidth="560.0" />
-      <Button fx:id="B_Compile" layoutX="500.0" layoutY="298.0" mnemonicParsing="false" onAction="#CompilePattern" prefWidth="80.0" text="Compile" />
-      <Button fx:id="B_Submit" disable="true" layoutX="500.0" layoutY="328.0" mnemonicParsing="false" onAction="#SubmitPattern" prefWidth="80.0" text="Submit" />
-      <Button fx:id="B_CancelButton" layoutX="500.0" layoutY="358.0" mnemonicParsing="false" onAction="#Cancel" prefWidth="80.0" text="Cancel" />
-      <CheckBox fx:id="CB_FLineAsATittle" layoutX="20.0" layoutY="302.0" mnemonicParsing="false" text="Set first line as a tittle." />
-      <Circle fx:id="C_Help" fill="DODGERBLUE" layoutX="28.0" layoutY="341.0" radius="8.0" stroke="BLACK" strokeType="INSIDE" />
+      <TextField fx:id="TF_ExceptionField" editable="false" layoutX="305.0" layoutY="230.0" prefHeight="25.0" prefWidth="275.0" />
+      <TextField fx:id="TF_UserInput" layoutX="20.0" layoutY="230.0" prefHeight="25.0" prefWidth="275.0" />
+      <TabPane layoutX="20.0" layoutY="264.0" prefHeight="100.0" prefWidth="560.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+            <Tab text="Finalize">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="71.0" prefWidth="560.0">
+                     <children>
+                        <Button fx:id="B_Compile" layoutX="5.0" layoutY="5.0" mnemonicParsing="false" onAction="#CompilePattern" prefWidth="80.0" text="Compile" />
+                        <Button fx:id="B_Submit" disable="true" layoutX="95.0" layoutY="5.0" mnemonicParsing="false" onAction="#SubmitPattern" prefWidth="80.0" text="Submit" />
+                        <Button fx:id="B_CancelButton" layoutX="475.0" layoutY="35.0" mnemonicParsing="false" onAction="#Cancel" prefWidth="80.0" text="Cancel" />
+                        <Circle fx:id="C_Help" fill="DODGERBLUE" layoutX="13.0" layoutY="45.0" radius="8.0" stroke="BLACK" strokeType="INSIDE" />
+                        <CheckBox layoutX="95.0" layoutY="39.0" mnemonicParsing="false" text="Add to your Sets" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+          <Tab text="Reading">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <CheckBox fx:id="CB_IgnoreFirstLine" layoutX="5.0" layoutY="5.0" mnemonicParsing="false" onAction="#IgnoreFirstLine" text="Ignore first line" />
+                        <CheckBox fx:id="CB_IgnoreEmptyLines" layoutX="5.0" layoutY="27.0" mnemonicParsing="false" onAction="#IgnoreEmptyLines" text="Ignore empty lines" />
+                        <CheckBox fx:id="CB_IgnoreNotFittingLines" layoutX="5.0" layoutY="49.0" mnemonicParsing="false" text="Ignore not fitting lines" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="Readeing Format">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
    </children>
 </AnchorPane>

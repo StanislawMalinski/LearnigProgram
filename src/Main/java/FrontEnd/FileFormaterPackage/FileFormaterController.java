@@ -44,7 +44,13 @@ public class FileFormaterController implements Initializable {
     Button B_CancelButton;
 
     @FXML
-    CheckBox CB_FLineAsATittle;
+    CheckBox CB_IgnoreFirstLine;
+
+    @FXML
+    CheckBox CB_IgnoreEmptyLines;
+
+    @FXML
+    CheckBox CB_IgnoreNotFittingLines;
 
     @FXML
     Circle C_Help;
@@ -53,12 +59,16 @@ public class FileFormaterController implements Initializable {
     private HelpPane pane;
 
     public void CompilePattern(ActionEvent event){
+        fileFormater.setIgnoreEmptyLines(CB_IgnoreEmptyLines.isSelected());
         int reply = fileFormater.CompilePattern(TF_UserInput.getText());
         setComunicator(reply);
     }
 
     public void SubmitPattern(ActionEvent event){
         fileFormater.setPattern(TF_UserInput.getText());
+        fileFormater.setIgnoreFirstLine(CB_IgnoreFirstLine.isSelected());
+        fileFormater.setIgnoreEmptyLines(CB_IgnoreEmptyLines.isSelected());
+        fileFormater.setIgnoreNptFittingLines(CB_IgnoreNotFittingLines.isSelected());
         fileFormater.getStandardReformattedFile();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
@@ -86,31 +96,23 @@ public class FileFormaterController implements Initializable {
         }
     }
 
-    protected String getHeadFileIgnoringFirstLine(boolean b){
-        String [] list = fileFormater.getHeadFromFile();
-        if(b && list[2] != null)
-            return list[1] + "\n"+ list[2];
-        else if(b)
-            return list[1];
-        else
-            return list[0] + "\n" + list[1];
+    public void IgnoreFirstLine(ActionEvent e){
+        fileFormater.setIgnoreFirstLine(CB_IgnoreFirstLine.isSelected());
+        TA_FIlePreview.setText(fileFormater.getAlteredText());
+    }
+
+    public void IgnoreEmptyLines(ActionEvent e){
+        fileFormater.setIgnoreFirstLine(CB_IgnoreFirstLine.isSelected());
+        TA_FIlePreview.setText(fileFormater.getAlteredText());
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         L_Comunicator.setText("");
         fileFormater = new FileFormater(FileEditor.getFile());
-        TA_FIlePreview.setText(getHeadFileIgnoringFirstLine(true));
-        fileFormater.setFirstLineAsATittle(true);
+        TA_FIlePreview.setText(fileFormater.getAlteredText());
         B_Submit.setDisable(true);
-        CB_FLineAsATittle.setSelected(true);
-        CB_FLineAsATittle.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                TA_FIlePreview.setText(getHeadFileIgnoringFirstLine(CB_FLineAsATittle.isSelected()));
-                fileFormater.setFirstLineAsATittle(CB_FLineAsATittle.isSelected());
-            }
-        });
+        CB_IgnoreFirstLine.setSelected(true);
         pane = new HelpPane(C_Help.getLayoutX(), C_Help.getLayoutY());
         C_Help.setOnMouseClicked(pane.giveOnMouseClicked());
         C_Help.setOnMouseExited(pane.giveOnMouseExited());

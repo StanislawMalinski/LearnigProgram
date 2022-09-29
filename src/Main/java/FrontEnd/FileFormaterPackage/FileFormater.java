@@ -12,15 +12,20 @@ class FileFormater {
     private File file;
     private TextField TF;
     private Label Comunicator;
-    private boolean FirstLineAsATittle;
+
     private String FaultyLine;
     private int FaultyLineIndex;
     private Pattern pattern;
     private Matcher m;
+    private FilePreviewFormatter formater;
 
     private boolean patContainHint;
     private boolean patContainFormat;
     private boolean patContainAspects;
+
+    private boolean IgnoreFirstLine;
+    private boolean IgnoreEmptyLines;
+    private boolean IgnoreNotFittingLines;
 
     protected FileFormater(File file){
         this.file = file;
@@ -28,9 +33,15 @@ class FileFormater {
 
     protected int CompilePattern(String Spattern) {
         try {
-            if( !Spattern.contains("\\def") || !Spattern.contains("\\ans")) return 4;
+            if( !Spattern.contains("\\def") || !Spattern.contains("\\ans"))
+                return 4;
             Pattern pattern = convertPattern(Spattern);
-            if(!isAplicapble(pattern)) return 2;
+            initilizeFormater(pattern);
+            if(formater.ValidateFile()) {
+                FaultyLine = formater.getFaultyLine();
+                FaultyLineIndex = formater.getIndexOfFaultyLine();
+                return 2;
+            }
             return 3;
         } catch (PatternSyntaxException e){
             return 1;
@@ -45,68 +56,15 @@ class FileFormater {
         //TODO add format and aspects
     }
 
-    private boolean isAplicapble(Pattern pattern){
-        BufferedReader BR = getBufferdReaderForFile(file);
-        String line = "";
-        int lineNumber = 0;
-        try {
-            while ((line = BR.readLine()) != null){
-                if(lineNumber == 0 && FirstLineAsATittle) {
-                    lineNumber++;
-                    continue;
-                }
-                m = pattern.matcher(line);
-                if(!m.matches()) {
-                    FaultyLine = line;
-                    FaultyLineIndex = lineNumber;
-                    return false;
-                }
-                lineNumber++;
-            }
-            return true;
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-        return false;
+    private void initilizeFormater(Pattern pattern){
+        formater = new FilePreviewFormatter(file,pattern);
+        formater.setIgnoreFirstLine(IgnoreFirstLine);
+        formater.setIgnoreEmptyLines(IgnoreEmptyLines);
+        formater.setIgnoreNotFittingLines(IgnoreNotFittingLines);
     }
 
-    protected String getFirstLine() {
-        BufferedReader BR = getBufferdReaderForFile(file);
-        try {
-            return BR.readLine();
-        } catch (IOException e){
-            return null;
-        }
-    }
-
-    protected String [] getHeadFromFile(){
-        BufferedReader BR = getBufferdReaderForFile(file);
-        String line;
-        String firstLine = "";
-        String middle = "";
-        String endLine = "";
-        try {
-            for (int i = 0; i < 11; i++) {
-                line = BR.readLine();
-                if (line == null) break;
-                if( i == 0) {
-                    firstLine = line;
-                } else if( i < 10) {
-                    middle += line + "\n";
-                } else {
-                    endLine = line;
-                }
-            }
-            String [] out = new String [3];
-            out[0] = firstLine;
-            out[1] = middle;
-            out[2] = endLine;
-            BR.close();
-            return out;
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-        return null;
+    protected String getAlteredText(){
+        return formater.getAlteredText();
     }
 
     private BufferedReader getBufferdReaderForFile(File file){
@@ -121,20 +79,18 @@ class FileFormater {
     protected File getStandardReformattedFile(){
         decodeStructureOfPattern();
         File Reformated = getNewFile();
-        BufferedReader BR = getBufferdReaderForFile(file);
+        File Alterd = new File("tmp.txt");
+        formater.getAlteredTextInFile(Alterd);
+        BufferedReader BR = getBufferdReaderForFile(Alterd);
         BufferedWriter BW = getBufferdWriterForFile(Reformated);
-        String oldLine;
+        String line;
         String newLine;
-        int line = 0;
+        int numberLine = 0;
         try {
-            while ((oldLine = BR.readLine()) != null){
-                if(FirstLineAsATittle && line == 0) {
-                    BW.write(oldLine + "\n");
-                } else {
-                    newLine = getFormatedLine(oldLine, line);
-                    BW.write(newLine);
-                }
-                line++;
+            while ((line = BR.readLine()) != null){
+                newLine = getFormatedLine(line, numberLine);
+                BW.write(newLine);
+                numberLine++;
             }
             BR.close();
             BW.close();
@@ -182,7 +138,7 @@ class FileFormater {
     private String getFormatedLine(String oldLine, int line){
         StringBuilder newLine = new StringBuilder();
         m = pattern.matcher(oldLine);
-        m.matches();
+        if(IgnoreNotFittingLines && !m.matches()) return "";
         newLine.append("$(<id>").append(line).append(")$");
         newLine.append("(<def>").append(m.group("def")).append(")$");
         newLine.append("(<ans>").append(m.group("ans")).append(")$");
@@ -209,11 +165,19 @@ class FileFormater {
         return FaultyLineIndex;
     }
 
-    protected void setFirstLineAsATittle(boolean b){
-        FirstLineAsATittle = b;
-    }
-
     protected void setPattern(String pattern){
         this.pattern = convertPattern(pattern);
+    }
+
+    public void setIgnoreFirstLine(boolean selected) {
+        IgnoreFirstLine = selected;
+    }
+
+    public void setIgnoreEmptyLines(boolean selected) {
+        IgnoreEmptyLines = selected;
+    }
+
+    public void setIgnoreNptFittingLines(boolean selected) {
+        IgnoreNotFittingLines = selected;
     }
 }

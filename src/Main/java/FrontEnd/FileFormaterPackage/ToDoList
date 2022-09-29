@@ -1,15 +1,18 @@
-# 1. Add cancel button that will cancel whole action.
-# 4. Add help button for regular expressions.
++ 1. Add cancel button that will cancel whole action.
++ 4. Add help button for regular expressions.
 5. Add button that will reformat file and it will add it to FileKeeper/Subjects/
 7. Add advanced options.
+7.0 Add features to advanced options.
     7.1. Optional preview of reformat file.
     7.2. Optional hint to regular expression.
     7.3. Optional name of the new file.
-    7.4. Ignore empty lines.
-    7.5. Ignore lines that doesn't fit the expression.
+    -> 7.4. Ignore empty lines.                                                                     -> Awaiting for test
+    -> 7.5. Ignore lines that doesn't fit the expression.
+        7.5.1. Add warning that shows when we eliminate more than 70% of lines.
     7.6. Highlight lines that match or not the expression.
     7.7. Add non standard reformat.
     7.8. Add optional information like hint.
     7.9. Set path where to save the new file.
     7.10. Optional aspects to regular expression.
-8. Move "Ignore first line" button to advanced options.
++ 8. Move "Ignore first line" button to advanced options.
+9. Refactor File Formater
