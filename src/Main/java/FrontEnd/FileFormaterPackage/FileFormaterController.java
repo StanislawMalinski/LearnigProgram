@@ -10,12 +10,18 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.CheckBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class FileFormaterController implements Initializable {
+
+    @FXML
+    Pane P_MainPane;
+
     @FXML
     TextArea TA_FIlePreview;
 
@@ -35,20 +41,30 @@ public class FileFormaterController implements Initializable {
     Button B_Submit;
 
     @FXML
+    Button B_CancelButton;
+
+    @FXML
     CheckBox CB_FLineAsATittle;
 
+    @FXML
+    Circle C_Help;
+
     private FileFormater fileFormater;
+    private HelpPane pane;
 
     public void CompilePattern(ActionEvent event){
         int reply = fileFormater.CompilePattern(TF_UserInput.getText());
         setComunicator(reply);
     }
 
-    //\[\w\] \ans - \def
-
     public void SubmitPattern(ActionEvent event){
         fileFormater.setPattern(TF_UserInput.getText());
         fileFormater.getStandardReformattedFile();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
+    }
+
+    public void Cancel(ActionEvent event){
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
     }
@@ -82,17 +98,22 @@ public class FileFormaterController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        L_Comunicator.setText("");
         fileFormater = new FileFormater(FileEditor.getFile());
         TA_FIlePreview.setText(getHeadFileIgnoringFirstLine(true));
         fileFormater.setFirstLineAsATittle(true);
         B_Submit.setDisable(true);
         CB_FLineAsATittle.setSelected(true);
-        CB_FLineAsATittle.setOnAction(new EventHandler<javafx.event.ActionEvent>() {
+        CB_FLineAsATittle.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(javafx.event.ActionEvent event) {
+            public void handle(ActionEvent event) {
                 TA_FIlePreview.setText(getHeadFileIgnoringFirstLine(CB_FLineAsATittle.isSelected()));
                 fileFormater.setFirstLineAsATittle(CB_FLineAsATittle.isSelected());
             }
         });
+        pane = new HelpPane(C_Help.getLayoutX(), C_Help.getLayoutY());
+        C_Help.setOnMouseClicked(pane.giveOnMouseClicked());
+        C_Help.setOnMouseExited(pane.giveOnMouseExited());
+        P_MainPane.getChildren().add(pane);
     }
 }

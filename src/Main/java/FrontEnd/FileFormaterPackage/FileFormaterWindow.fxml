@@ -6,15 +6,18 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontEnd.FileFormaterPackage.FileFormaterController">
+<AnchorPane fx:id="P_MainPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontEnd.FileFormaterPackage.FileFormaterController">
    <children>
       <Label fx:id="L_Comunicator" layoutX="14.0" layoutY="369.0" text="Label" />
       <TextArea fx:id="TA_FIlePreview" editable="false" layoutX="20.0" layoutY="20.0" prefHeight="200.0" prefWidth="560.0" />
       <TextField fx:id="TF_ExceptionField" editable="false" layoutX="20.0" layoutY="230.0" prefHeight="25.0" prefWidth="560.0" />
       <TextField fx:id="TF_UserInput" layoutX="20.0" layoutY="265.0" prefHeight="25.0" prefWidth="560.0" />
       <Button fx:id="B_Compile" layoutX="500.0" layoutY="298.0" mnemonicParsing="false" onAction="#CompilePattern" prefWidth="80.0" text="Compile" />
-      <Button fx:id="B_Submit" disable="true" layoutX="500.0" layoutY="329.0" mnemonicParsing="false" onAction="#SubmitPattern" prefWidth="80.0" text="Submit" />
+      <Button fx:id="B_Submit" disable="true" layoutX="500.0" layoutY="328.0" mnemonicParsing="false" onAction="#SubmitPattern" prefWidth="80.0" text="Submit" />
+      <Button fx:id="B_CancelButton" layoutX="500.0" layoutY="358.0" mnemonicParsing="false" onAction="#Cancel" prefWidth="80.0" text="Cancel" />
       <CheckBox fx:id="CB_FLineAsATittle" layoutX="20.0" layoutY="302.0" mnemonicParsing="false" text="Set first line as a tittle." />
+      <Circle fx:id="C_Help" fill="DODGERBLUE" layoutX="28.0" layoutY="341.0" radius="8.0" stroke="BLACK" strokeType="INSIDE" />
    </children>
 </AnchorPane>

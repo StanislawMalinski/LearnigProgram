@@ -1,5 +1,5 @@
-1. Add cancel button that will cancel whole action.
-4. Add help for regular expressions.
+# 1. Add cancel button that will cancel whole action.
+# 4. Add help button for regular expressions.
 5. Add button that will reformat file and it will add it to FileKeeper/Subjects/
 7. Add advanced options.
     7.1. Optional preview of reformat file.

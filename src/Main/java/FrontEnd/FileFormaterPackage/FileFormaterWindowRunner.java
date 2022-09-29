@@ -18,6 +18,7 @@ class FileFormaterWindowRunner{
             Parent root = loader.load();
             Scene scene = new Scene(root);
             stage.setScene(scene);
+            stage.setResizable(false);
             stage.setIconified(false);
             stage.show();
         }catch (IOException e){
