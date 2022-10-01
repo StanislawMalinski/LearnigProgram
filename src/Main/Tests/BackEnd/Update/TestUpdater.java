@@ -1,10 +1,9 @@
 package BackEnd.Update;
 
 import BackEnd.Material;
-import BackEnd.Update.Updater;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
 import java.io.BufferedReader;
@@ -18,13 +17,13 @@ import java.util.regex.Pattern;
 import static org.junit.Assert.*;
 
 public class TestUpdater {
-    private Material material;
-    private Updater updater;
-    private File file;
+    private static Material material;
+    private static Updater updater;
+    private static File file;
     private BufferedReader bufferedReader;
 
-    @Before
-    public void Initialize(){
+    @BeforeAll
+    public static void Initialize(){
         material = new Material(new File("src/Main/TestResources/WłoskiCoded.txt"));
         updater = new Updater(material);
 
@@ -111,8 +110,8 @@ public class TestUpdater {
         return true;
     }
 
-    @After
-    public void cleanFile(){
+    @AfterAll
+    public static void cleanFile(){
         updater.removeTmpFile();
     }
 }

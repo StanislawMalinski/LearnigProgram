@@ -1,11 +1,9 @@
 package FrontEnd.FileFormaterPackage;
 
 import Util.FileComparator;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 
 import javax.naming.InsufficientResourcesException;
@@ -17,19 +15,19 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class TestFileFormatingWriter {
     private FileFormatingWriter writer;
-    private String pattern;
+    private static String pattern;
 
-    private File Output;
+    private static File Output;
 
-    private File fileExpected;
+    private static File fileExpected;
 
-    private File filePropre;
-    private File fileIgnoreFirstLine;
-    private File fileIgnoreEmptyLines;
-    private File fileIgnoreNotFittingLine;
+    private static File filePropre;
+    private static File fileIgnoreFirstLine;
+    private static File fileIgnoreEmptyLines;
+    private static File fileIgnoreNotFittingLine;
 
-    @Before
-    public void setUp() {
+    @BeforeAll
+    public static void setUp() {
         Output = new File("src/Main/TestResources/tmp.txt");
         fileExpected = new File("src/Main/TestResources/CodedExpected.txt");
         filePropre = new File("src/Main/TestResources/ProperFile.txt");
@@ -49,8 +47,8 @@ public class TestFileFormatingWriter {
         }
     }
 
-    @After
-    public void deleteOutputFile(){
+    @AfterAll
+    public static void deleteOutputFile(){
         Output.delete();
     }
 

@@ -1,16 +1,16 @@
 package BackEnd;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestMaterial {
     private Teacher teacher;
-    private Material material;
+    private static Material material;
 
-    @Before
-    public void Initialize(){
+    @BeforeAll
+    public static void Initialize(){
         material = new Material("src/Main/TestResources/WłoskiCoded.txt");
     }
 

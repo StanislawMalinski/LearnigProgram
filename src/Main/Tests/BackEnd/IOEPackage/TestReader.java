@@ -2,34 +2,33 @@ package BackEnd.IOEPackage;
 
 import BackEnd.Material;
 import BackEnd.Question;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 
 import static org.junit.Assert.*;
 
 public class TestReader {
-    private Reader reader;
-    private File file;
-    private Material material;
-    private Question question0;
-    private Question question1;
-    private Question question2;
-    private Question question3;
-    private Question question4;
-    private Question question5;
-    private Question question6;
-    private Question question7;
+    private static File file;
+    private static Material material;
+    private static Question question0;
+    private static Question question1;
+    private static Question question2;
+    private static Question question3;
+    private static Question question4;
+    private static Question question5;
+    private static Question question6;
+    private static Question question7;
 
-    @Before
-    public void Initialize(){
+    @BeforeAll
+    public static void Initialize(){
         file = new File("src/Main/TestResources/WłoskiCoded.txt");
         material = new Material(file);
     }
 
-    @Before
-    public void IntitizalizeQuestions(){
+    @BeforeAll
+    public static void IntitizalizeQuestions(){
         question0 = new Question();
         question1 = new Question();
         question2 = new Question();

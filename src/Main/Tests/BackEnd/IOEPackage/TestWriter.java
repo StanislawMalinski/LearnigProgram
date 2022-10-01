@@ -2,9 +2,9 @@ package BackEnd.IOEPackage;
 
 import BackEnd.Material;
 import BackEnd.Question;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeAll;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -16,11 +16,11 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 public class TestWriter {
-    private Material material;
-    private File stream;
+    private static Material material;
+    private static File stream;
 
-    @Before
-    public void Initiazlize(){
+    @BeforeAll
+    public static void Initiazlize(){
         material = new Material();
         stream = new File("tmp.txt");
         try{
@@ -78,8 +78,8 @@ public class TestWriter {
         }
     }
 
-    @After
-    public void Clear(){
+    @AfterAll
+    public static void Clear(){
         stream.delete();
     }
 }

@@ -10,24 +10,25 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Circle?>
 
-<AnchorPane fx:id="P_MainPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontEnd.FileFormaterPackage.FileFormaterController">
+<AnchorPane fx:id="P_MainPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontEnd.FileFormaterPackage.FileFormatterController">
    <children>
-      <Label fx:id="L_Comunicator" layoutX="14.0" layoutY="369.0" />
+      <Label fx:id="L_Communicator" layoutX="14.0" layoutY="369.0" />
       <TextArea fx:id="TA_FilePreview" editable="false" layoutX="20.0" layoutY="20.0" prefHeight="200.0" prefWidth="560.0" />
       <TextField fx:id="TF_ExceptionField" editable="false" layoutX="305.0" layoutY="230.0" prefHeight="25.0" prefWidth="275.0" />
-      <TextField fx:id="TF_UserInput" layoutX="20.0" layoutY="230.0" prefHeight="25.0" prefWidth="275.0" text="\\d+\. \def -&gt; \ans" />
-      <TabPane layoutX="20.0" layoutY="264.0" prefHeight="100.0" prefWidth="560.0" tabClosingPolicy="UNAVAILABLE">
+      <TextField fx:id="TF_UserInput" layoutX="20.0" layoutY="230.0" prefHeight="25.0" prefWidth="275.0" />
+      <TabPane layoutX="20.0" layoutY="260.0" prefHeight="120.0" prefWidth="560.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
             <Tab text="Finalize">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="71.0" prefWidth="560.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="96.0" prefWidth="560.0">
                      <children>
                         <Button fx:id="B_Compile" layoutX="5.0" layoutY="5.0" mnemonicParsing="false" onAction="#CompilePattern" prefWidth="80.0" text="Compile" />
                         <Button fx:id="B_Submit" disable="true" layoutX="95.0" layoutY="5.0" mnemonicParsing="false" onAction="#SubmitPattern" prefWidth="80.0" text="Submit" />
-                        <Button fx:id="B_CancelButton" layoutX="475.0" layoutY="35.0" mnemonicParsing="false" onAction="#Cancel" prefWidth="80.0" text="Cancel" />
+                        <Button fx:id="B_CancelButton" layoutX="466.0" layoutY="53.0" mnemonicParsing="false" onAction="#Cancel" prefWidth="80.0" text="Cancel" />
                         <Circle fx:id="C_Help" fill="DODGERBLUE" layoutX="13.0" layoutY="45.0" radius="8.0" stroke="BLACK" strokeType="INSIDE" />
-                        <CheckBox layoutX="95.0" layoutY="39.0" mnemonicParsing="false" text="Add to your Sets" />
-                        <TextField fx:id="TF_SetsName" layoutX="200.0" layoutY="5.0" />
+                        <TextField fx:id="TF_SetsName" layoutX="279.0" layoutY="5.0" />
+                        <CheckBox fx:id="CB_SetVersioning" layoutX="95.0" layoutY="39.0" mnemonicParsing="false" onAction="#SetVersioning" text="Set versioning" />
+                        <Label layoutX="220.0" layoutY="9.0" text="Sets name" />
                      </children>
                   </AnchorPane>
               </content>

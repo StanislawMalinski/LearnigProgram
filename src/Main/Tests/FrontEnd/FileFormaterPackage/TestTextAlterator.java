@@ -1,8 +1,7 @@
 package FrontEnd.FileFormaterPackage;
 
-import Util.InvalidFileStructureException;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 
@@ -11,12 +10,12 @@ import static org.junit.Assert.*;
 public class TestTextAlterator {
 
     private TextAlterator alterator;
-    private String pattern;
+    private static String pattern;
 
-    private File filePropre;
-    private File fileIgnoreFirstLine;
-    private File fileIgnoreEmptyLines;
-    private File fileIgnoreNotFittingLine;
+    private static File filePropre;
+    private static File fileIgnoreFirstLine;
+    private static File fileIgnoreEmptyLines;
+    private static File fileIgnoreNotFittingLine;
 
     private String desirableText =
             """
@@ -26,8 +25,8 @@ public class TestTextAlterator {
             4. Mikołaj -> Kowalczyk
             5. Adam -> Kubica""";
 
-    @Before
-    public void setUp() {
+    @BeforeAll
+    public static void setUp() {
         filePropre = new File("src/Main/TestResources/ProperFile.txt");
         fileIgnoreFirstLine = new File("src/Main/TestResources/FileWithFirstLines.txt");
         fileIgnoreEmptyLines = new File("src/Main/TestResources/FileWithEmptyLines.txt");

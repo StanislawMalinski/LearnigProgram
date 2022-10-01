@@ -19,7 +19,7 @@ import java.net.URL;
 import java.security.InvalidParameterException;
 import java.util.ResourceBundle;
 
-public class FileFormaterController implements Initializable {
+public class FileFormatterController implements Initializable {
 
     @FXML
     TextField TF_SetsName;
@@ -37,7 +37,7 @@ public class FileFormaterController implements Initializable {
     TextField TF_UserInput;
 
     @FXML
-    Label L_Comunicator;
+    Label L_Communicator;
 
     @FXML
     Button B_Compile;
@@ -60,6 +60,9 @@ public class FileFormaterController implements Initializable {
     @FXML
     Circle C_Help;
 
+    @FXML
+    CheckBox CB_SetVersioning;
+
     private HelpPane pane;
     private String FaultyLine;
     private int indexOfFaultyLine;
@@ -70,28 +73,59 @@ public class FileFormaterController implements Initializable {
             compiler = new Compiler(FileEditor.getFile(), TF_UserInput.getText());
             updateFRF(compiler);
         } catch (InvalidParameterException e){
-            setComunicator(4);
+            setCommunicator(4);
             return;
         }
         if(!compiler.compile()){
             TF_ExceptionField.setText(compiler.getIndexOfFaultyLine() + ".  " + compiler.getFaultyLine());
             FaultyLine = compiler.getFaultyLine();
             indexOfFaultyLine = compiler.getIndexOfFaultyLine();
-            setComunicator(2);
+            setCommunicator(2);
         }else{
             B_Submit.setDisable(false);
             TF_ExceptionField.setText("");
-            setComunicator(3);
+            setCommunicator(3);
+        }
+    }
+
+    private void setCommunicator(int i){
+        TF_ExceptionField.setText("");
+        switch (i) {
+            case 0 -> {
+                L_Communicator.setText("");
+                B_Submit.setDisable(true);}
+            case 1 -> {
+                L_Communicator.setText("Invalid pattern. Try our help guide in menu Help -> Regular Expression.");
+                B_Submit.setDisable(true);}
+            case 2 -> {
+                L_Communicator.setText("Given pattern is not applicable, try different pattern.");
+                B_Submit.setDisable(true);
+                TF_ExceptionField.setText(indexOfFaultyLine + ".  " + FaultyLine);}
+            case 3 -> {
+                L_Communicator.setText("Compiled successfully.");
+                B_Submit.setDisable(false);}
+            case 4 -> {
+                L_Communicator.setText("Expression should contain \"\\def\" and \"\\ans\".");
+                B_Submit.setDisable(true);}
+            case 5 -> {L_Communicator.setText("Invalid name or the name given is already taken.");
+                B_Submit.setDisable(true);}
+            case 6 -> {
+                L_Communicator.setText("Filename must not contain dots, if its not for extension \".txt\".");
+                B_Submit.setDisable(true);}
         }
     }
 
     public void SubmitPattern(ActionEvent event){
         FileFormatingWriter writer = new FileFormatingWriter(FileEditor.getFile(),TF_UserInput.getText());
         updateFRF(writer);
-        FileCreator creator = new FileCreator(FileEditor.getFile().getName());
-        if(!creator.CreateFile()){
-            creator.CreateFileWithVersionIfExists();
+        FileCreator creator;
+        try {
+            creator = new FileCreator(TF_SetsName.getText());
+        } catch (InvalidParameterException e){
+            setCommunicator(6);
+            return;
         }
+        creator.CreateFile();
         File outputStream = creator.getFile();
         writer.setOutputStream(outputStream);
         try {
@@ -115,47 +149,34 @@ public class FileFormaterController implements Initializable {
         stage.close();
     }
 
-    private void setComunicator(int i){
-        TF_ExceptionField.setText("");
-        switch (i) {
-            case 0 -> {L_Comunicator.setText("");
-                B_Submit.setDisable(true);}
-            case 1 -> {L_Comunicator.setText("Invalid pattern. Try our help guide in menu Help -> Regular Expression.");
-                B_Submit.setDisable(true);}
-            case 2 -> {L_Comunicator.setText("Given pattern is not aplicable, try diffrent pattern.");
-                B_Submit.setDisable(true);
-                TF_ExceptionField.setText(indexOfFaultyLine + ".  " + FaultyLine);}
-            case 3 -> {L_Comunicator.setText("Compiled successfully.");
-                B_Submit.setDisable(false);}
-            case 4 -> {L_Comunicator.setText("Expression should contain \"\\def\" and \"\\ans\".");
-                B_Submit.setDisable(true);}
-        }
-    }
-
     public void IgnoreFirstLine(ActionEvent e){
         TextAlterator alterator = new TextAlterator(FileEditor.getFile(),TF_UserInput.getText());
         updateFRF(alterator);
         TA_FilePreview.setText(alterator.getAlteredText());
-        setComunicator(0);
+        setCommunicator(0);
     }
 
     public void IgnoreEmptyLines(ActionEvent e){
         TextAlterator alterator = new TextAlterator(FileEditor.getFile(),TF_UserInput.getText());
         updateFRF(alterator);
         TA_FilePreview.setText(alterator.getAlteredText());
-        setComunicator(0);
+        setCommunicator(0);
     }
 
     public void IgnoreNotFittingLines(ActionEvent e){
         TextAlterator alterator = new TextAlterator(FileEditor.getFile(),TF_UserInput.getText());
         updateFRF(alterator);
         TA_FilePreview.setText(alterator.getAlteredText());
-        setComunicator(0);
+        setCommunicator(0);
+    }
+
+    public void SetVersioning(ActionEvent e){
+        FileCreator.setVersioning(CB_SetVersioning.isSelected());
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        L_Comunicator.setText("");
+        L_Communicator.setText("");
         TA_FilePreview.setText(FileEditor.getText());
         B_Submit.setDisable(true);
         pane = new HelpPane(C_Help.getLayoutX(), C_Help.getLayoutY());
