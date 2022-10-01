@@ -1,0 +1,5 @@
+$(<id>0)$(<def>Stanisław)$(<ans>Maliński)$(<sequence>)$(<att>0)$(<suc>0)$
+$(<id>1)$(<def>Hania)$(<ans>Czaban)$(<sequence>)$(<att>0)$(<suc>0)$
+$(<id>2)$(<def>Maciek)$(<ans>Szarecki)$(<sequence>)$(<att>0)$(<suc>0)$
+$(<id>3)$(<def>Mikołaj)$(<ans>Kowalczyk)$(<sequence>)$(<att>0)$(<suc>0)$
+$(<id>4)$(<def>Adam)$(<ans>Kubica)$(<sequence>)$(<att>0)$(<suc>0)$

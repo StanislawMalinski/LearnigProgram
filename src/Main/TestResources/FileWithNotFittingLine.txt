@@ -1,5 +1,6 @@
 1. Stanisław -> Maliński
 2. Hania -> Czaban
-3. Maciek <- Szarecki
+A. Andrzej -> Duda
+3. Maciek -> Szarecki
 4. Mikołaj -> Kowalczyk
 5. Adam -> Kubica

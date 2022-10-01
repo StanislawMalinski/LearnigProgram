@@ -12,10 +12,10 @@
 
 <AnchorPane fx:id="P_MainPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FrontEnd.FileFormaterPackage.FileFormaterController">
    <children>
-      <Label fx:id="L_Comunicator" layoutX="14.0" layoutY="369.0" text="Label" />
-      <TextArea fx:id="TA_FIlePreview" editable="false" layoutX="20.0" layoutY="20.0" prefHeight="200.0" prefWidth="560.0" />
+      <Label fx:id="L_Comunicator" layoutX="14.0" layoutY="369.0" />
+      <TextArea fx:id="TA_FilePreview" editable="false" layoutX="20.0" layoutY="20.0" prefHeight="200.0" prefWidth="560.0" />
       <TextField fx:id="TF_ExceptionField" editable="false" layoutX="305.0" layoutY="230.0" prefHeight="25.0" prefWidth="275.0" />
-      <TextField fx:id="TF_UserInput" layoutX="20.0" layoutY="230.0" prefHeight="25.0" prefWidth="275.0" />
+      <TextField fx:id="TF_UserInput" layoutX="20.0" layoutY="230.0" prefHeight="25.0" prefWidth="275.0" text="\\d+\. \def -&gt; \ans" />
       <TabPane layoutX="20.0" layoutY="264.0" prefHeight="100.0" prefWidth="560.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
             <Tab text="Finalize">
@@ -27,6 +27,7 @@
                         <Button fx:id="B_CancelButton" layoutX="475.0" layoutY="35.0" mnemonicParsing="false" onAction="#Cancel" prefWidth="80.0" text="Cancel" />
                         <Circle fx:id="C_Help" fill="DODGERBLUE" layoutX="13.0" layoutY="45.0" radius="8.0" stroke="BLACK" strokeType="INSIDE" />
                         <CheckBox layoutX="95.0" layoutY="39.0" mnemonicParsing="false" text="Add to your Sets" />
+                        <TextField fx:id="TF_SetsName" layoutX="200.0" layoutY="5.0" />
                      </children>
                   </AnchorPane>
               </content>
@@ -37,7 +38,7 @@
                      <children>
                         <CheckBox fx:id="CB_IgnoreFirstLine" layoutX="5.0" layoutY="5.0" mnemonicParsing="false" onAction="#IgnoreFirstLine" text="Ignore first line" />
                         <CheckBox fx:id="CB_IgnoreEmptyLines" layoutX="5.0" layoutY="27.0" mnemonicParsing="false" onAction="#IgnoreEmptyLines" text="Ignore empty lines" />
-                        <CheckBox fx:id="CB_IgnoreNotFittingLines" layoutX="5.0" layoutY="49.0" mnemonicParsing="false" text="Ignore not fitting lines" />
+                        <CheckBox fx:id="CB_IgnoreNotFittingLines" layoutX="5.0" layoutY="49.0" mnemonicParsing="false" onAction="#IgnoreNotFittingLines" text="Ignore not fitting lines" />
                      </children>
                   </AnchorPane>
             </content>
