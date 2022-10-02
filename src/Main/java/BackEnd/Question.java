@@ -30,6 +30,18 @@ public class Question implements Comparable<Question>{
         numberOfAspects = 0;
     }
 
+    public Question(int id, String definition, String answer, String sequence, int attempts, int successes) {
+        this.definition = definition;
+        this.answer = answer;
+        this.id = id;
+        this.attempts = attempts;
+        this.successes = successes;
+        this.sequence = sequence;
+        aspects = new String[0];
+        nameOfAspects = new String[0];
+        numberOfAspects = 0;
+    }
+
     public void SizeUpAspects(){
         String [] Naspects = new String[numberOfAspects + 1];
         String [] NnameOfAspects = new String[numberOfAspects + 1];
@@ -39,8 +51,6 @@ public class Question implements Comparable<Question>{
         nameOfAspects = NnameOfAspects;
         numberOfAspects ++;
     }
-
-
 
     @Override
     public boolean equals(Object o){

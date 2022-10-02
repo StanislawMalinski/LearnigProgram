@@ -50,16 +50,13 @@ class PatternDecoder {
         for(int i = 1; i <= numberOfAspects; i++){
             pattern += "\\(<aspect" + i + ">(?<aspect" + i + ">.+)\\)\\$";
         }
-        if(numberOfAspects != 0)
-            return pattern;
-        else
-            return "";
+        return pattern;
     }
 
     private Question extrectDateAndCreateQustion(){
         Question question = new Question();
         Matcher m = pattern.matcher(line);
-        m.matches();
+        if(!m.matches()) return null;
         question.id = Integer.parseInt(m.group("id"));
         question.definition = m.group("def");
         question.answer = m.group("ans");
